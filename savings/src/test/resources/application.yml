@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: savings
+  jpa:
+    database: h2
+
+app:
+  account-number: a

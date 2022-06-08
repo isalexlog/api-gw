@@ -1,0 +1,39 @@
+version: "3"
+services:
+  db:
+    image: postgres
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_PASSWORD: secret
+      POSTGRES_DB: savings
+
+  api-gw:
+    image: api-gw
+    restart: always
+    ports:
+      - "8080:8080"
+    environment:
+      app.savings-a: http://savings-a:8081
+      app.savings-b: http://savings-b:8082
+
+  savings-a:
+    image: savings
+    restart: always
+    ports:
+      - "8081:8081"
+    environment:
+      server.port: 8081
+      app.account-number: a
+      spring.datasource.url: jdbc:postgresql://db:5432/savings
+
+  savings-b:
+    image: savings
+    restart: always
+    ports:
+      - "8082:8082"
+    environment:
+      server.port: 8082
+      app.account-number: b
+      spring.datasource.url: jdbc:postgresql://db:5432/savings

@@ -1,0 +1,22 @@
+app:
+  savings-a: http://localhost:8081
+  savings-b: http://localhost:8082
+
+spring:
+  cloud:
+    gateway:
+      httpclient:
+        response-timeout: 5s
+      routes:
+        - id: savings-a
+          uri: ${app.savings-a:http://savings-a}
+          predicates:
+            - Path=/savings/a/**
+          filters:
+            - RewritePath=/savings/a/(?<segment>.*),/$\{segment}
+        - id: savings-b
+          uri: ${app.savings-b:http://savings-b}
+          predicates:
+            - Path=/savings/b/**
+          filters:
+            - RewritePath=/savings/b/(?<segment>.*),/$\{segment}

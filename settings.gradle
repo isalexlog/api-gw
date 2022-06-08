@@ -1,0 +1,4 @@
+rootProject.name = 'kadmos'
+
+include 'savings'
+include 'api-gw'

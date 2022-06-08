@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: savings
+  datasource:
+    url: jdbc:postgresql://localhost:5432/savings
+    username: postgres
+    password: secret
+  jpa:
+    database: postgresql
+    hibernate:
+      ddl-auto: update
+
+app:
+  account-number: a
